@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var alarmManager: AlarmManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(this.root) }
@@ -22,8 +24,8 @@ class MainActivity : AppCompatActivity() {
             val calendar = Calendar.getInstance()
             // 現在の時間をミリ秒で取得．
             calendar.timeInMillis = System.currentTimeMillis()
-            // 10秒後に設定．
-            calendar.add(Calendar.SECOND, 10)
+            // 5秒後に設定．
+            calendar.add(Calendar.SECOND, 5)
             // calendar.set(Calendar.HOGE, amount)で時間，分などを指定できる．
 
             // アラームがトリガーされたときに開始するペンディングインテント．
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             )
 
             // AlarmManagerをインスタンス化する．
-            val alarmManager: AlarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+            alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
             /** アラームをセットする．
              *
@@ -59,7 +61,21 @@ class MainActivity : AppCompatActivity() {
              */
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
 
-            Toast.makeText(this, "10秒後にアラームをセット", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "5秒後にアラームをセット", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.cancelButton.setOnClickListener {
+            val pendingIntent = PendingIntent.getBroadcast(
+                this,
+                0,
+                Intent(this, AlarmBroadcastReceiver::class.java),
+                PendingIntent.FLAG_NO_CREATE
+            )
+
+            // アラームをキャンセルする．
+            alarmManager.cancel(pendingIntent)
+
+            Toast.makeText(this, "アラームをキャンセル", Toast.LENGTH_SHORT).show()
         }
     }
 }
