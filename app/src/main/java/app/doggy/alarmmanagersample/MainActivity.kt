@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import app.doggy.alarmmanagersample.databinding.ActivityMainBinding
 import java.util.Calendar
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
              * RTC_WAKEUP：指定された時刻にデバイスのスリープを解除してペンディングインテントを開始する．
              */
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+            Log.d(ALARM_LOG, "alarmManager.set()")
 
             Toast.makeText(this, "5秒後にアラームをセット", Toast.LENGTH_SHORT).show()
         }
@@ -76,8 +78,13 @@ class MainActivity : AppCompatActivity() {
 
             // アラームをキャンセルする．
             alarmManager.cancel(pendingIntent)
+            Log.d(ALARM_LOG, "alarmManager.cancel()")
 
             Toast.makeText(this, "アラームをキャンセル", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    companion object {
+        const val ALARM_LOG = "ALARM_LOG"
     }
 }
