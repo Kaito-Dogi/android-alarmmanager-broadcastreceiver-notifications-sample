@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var alarmManager: AlarmManager
 
-    private val requestCode = 1
+    private val requestCode: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
