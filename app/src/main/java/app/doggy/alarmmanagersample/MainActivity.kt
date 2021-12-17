@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var alarmManager: AlarmManager
 
+    private val requestCode = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(this.root) }
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             // アラームがトリガーされたときに開始するペンディングインテント．
             val pendingIntent = PendingIntent.getBroadcast(
                 this,
-                0,
+                requestCode,
                 Intent(this, AlarmBroadcastReceiver::class.java),
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
@@ -67,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         binding.cancelButton.setOnClickListener {
             val pendingIntent = PendingIntent.getBroadcast(
                 this,
-                0,
+                requestCode,
                 Intent(this, AlarmBroadcastReceiver::class.java),
                 PendingIntent.FLAG_NO_CREATE
             )
