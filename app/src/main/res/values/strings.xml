@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AlarmManagerSample</string>
+    <string name="notification_title">AlarmBroadcastReceiver</string>
+    <string name="notification_text">AlarmBroadcastReceiverがアラームを検知しました．</string>
+    <string name="notification_id">AlarmBroadcastReceiver</string>
+    <string name="channel_name">AlarmBroadcastReceiver</string>
 </resources>

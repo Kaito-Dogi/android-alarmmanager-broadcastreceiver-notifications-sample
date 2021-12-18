@@ -35,7 +35,10 @@ class MainActivity : AppCompatActivity() {
             val pendingIntent = PendingIntent.getBroadcast(
                 this,
                 requestCode,
-                Intent(this, AlarmBroadcastReceiver::class.java),
+                Intent(this, AlarmBroadcastReceiver::class.java).putExtra(
+                    REQUEST_CODE,
+                    requestCode
+                ),
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 
@@ -85,6 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val REQUEST_CODE = "REQUEST_CODE"
         const val ALARM_LOG = "ALARM_LOG"
     }
 }
