@@ -29,7 +29,18 @@ class MainActivity : AppCompatActivity() {
             calendar.timeInMillis = System.currentTimeMillis()
             // 5秒後に設定．
             calendar.add(Calendar.SECOND, 5)
-            // calendar.set(Calendar.HOGE, amount)で時間，分などを指定できる．
+
+            /** calendar.set(Calendar.CONSTANT, amount)で日付と時刻を指定できる．
+             *
+             * 例：2021年12月19日午後3時20分 日本標準時
+             * calendar.set(Calendar.YEAR, 2021)
+             * calendar.set(Calendar.MONTH, 11)
+             * calendar.set(Calendar.DATE, 19)
+             * calendar.set(Calendar.AM_PM,Calendar.PM)
+             * calendar.set(Calendar.HOUR, 3)
+             * calendar.set(Calendar.MINUTE, 20)
+             * calendar.timeZone = TimeZone.getTimeZone("Asia/Tokyo")
+             */
 
             // アラームがトリガーされたときに開始するペンディングインテント．
             val pendingIntent = PendingIntent.getBroadcast(
