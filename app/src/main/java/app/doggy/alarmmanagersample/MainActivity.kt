@@ -48,8 +48,7 @@ class MainActivity : AppCompatActivity() {
                 REQUEST_CODE,
                 // 明示的なブロードキャスト。
                 Intent(this, AlarmBroadcastReceiver::class.java).putExtra(
-                    REQUEST_CODE_KEY,
-                    REQUEST_CODE
+                    REQUEST_CODE_KEY, REQUEST_CODE
                 ),
                 PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE
             )
