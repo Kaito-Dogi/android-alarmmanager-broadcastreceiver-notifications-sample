@@ -43,16 +43,15 @@ class MainActivity : AppCompatActivity() {
 
             // アラームがトリガーされたときに開始するペンディングインテント。
             val pendingIntent = PendingIntent.getBroadcast(
-                this,
-                // requestCodeの値で、Receiver側で処理を切り分ける。
+                this@MainActivity,
+                // requestCodeの値で、ペンディングインテントを識別する。
                 REQUEST_CODE,
                 // 明示的なブロードキャスト。
                 Intent(this, AlarmBroadcastReceiver::class.java).putExtra(
                     REQUEST_CODE_KEY,
                     REQUEST_CODE
                 ),
-                //
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE
             )
 
             // AlarmManagerをインスタンス化する。
@@ -94,10 +93,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.cancelButton.setOnClickListener {
             val pendingIntent = PendingIntent.getBroadcast(
-                this,
+                this@MainActivity,
                 REQUEST_CODE,
                 Intent(this, AlarmBroadcastReceiver::class.java),
-                PendingIntent.FLAG_NO_CREATE
+                PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE
             )
 
             // アラームをキャンセルする。
